@@ -92,7 +92,7 @@ func (d *Duration) Value() (value time.Duration) {
 	return time.Duration(atomic.LoadInt64(&d.value))
 }
 
-var errNil error = errors.New("nil")
+var errNil = errors.New("nil")
 
 // Error is a wrapper for atomically accessed error values
 type Error struct {
