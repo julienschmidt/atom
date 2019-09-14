@@ -92,6 +92,7 @@ func (d *Duration) Value() (value time.Duration) {
 	return time.Duration(atomic.LoadInt64(&d.value))
 }
 
+// errNil is a special error signaling a nil value.
 var errNil = errors.New("nil")
 
 // Error is a wrapper for atomically accessed error values
@@ -103,6 +104,8 @@ type Error struct {
 // Set sets the new value regardless of the previous value.
 // The value may be nil
 func (e *Error) Set(value error) {
+	// Setting atomic.Value to nil is not allowed.
+	// Use the special error errNil instead to signal a nil value.
 	if value == nil {
 		value = errNil
 	}
