@@ -56,7 +56,7 @@ func (b *Bool) Swap(new bool) (old bool) {
 }
 
 // Value returns the current value
-func (b *Bool) Value() bool {
+func (b *Bool) Value() (value bool) {
 	return atomic.LoadUint32(&b.value) > 0
 }
 
@@ -110,7 +110,7 @@ func (e *Error) Set(value error) {
 }
 
 // Value returns the current error value
-func (e *Error) Value() error {
+func (e *Error) Value() (value error) {
 	v := e.value.Load()
 	if v == nil || v == errNil {
 		return nil
@@ -273,7 +273,7 @@ func (s *String) Set(value string) {
 }
 
 // Value returns the current error value
-func (s *String) Value() string {
+func (s *String) Value() (value string) {
 	v := s.value.Load()
 	if v == nil {
 		return ""
