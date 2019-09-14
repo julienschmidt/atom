@@ -7,6 +7,10 @@ import (
 )
 
 func TestBool(t *testing.T) {
+	// make go cover happy
+	var nc noCopy
+	nc.Lock()
+
 	var b Bool
 	if b.Value() {
 		t.Fatal("Expected initial value to be false")
