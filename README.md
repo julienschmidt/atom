@@ -6,7 +6,7 @@ Intuitive wrappers types enforcing atomic access for lock-free concurrency.
 A safe and convenient alternative to sync/atomic.
 
 - Prevents unsafe non-atomic access
-- Prevents copying (which is a non-atomic read)
+- Prevents unsafe copying (which is a non-atomic read)
 - No size overhead. The wrappers have the same size as the wrapped type
 
 ## Usage
