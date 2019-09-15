@@ -427,3 +427,45 @@ func TestUint64(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 }
+
+func TestUintptr(t *testing.T) {
+	var u Uintptr
+	if u.Value() != 0 {
+		t.Fatal("Expected initial value to be 0")
+	}
+
+	v1 := uintptr(1337)
+	u.Set(v1)
+	if v := u.Value(); v != v1 {
+		t.Fatal("Value unchanged")
+	}
+
+	if u.Add(-v1) != 0 {
+		t.Fatal("New value does not match")
+	}
+	if u.Add(v1) != v1 {
+		t.Fatal("New value does not match")
+	}
+
+	v2 := uintptr(987654321)
+	if u.CompareAndSwap(v2, v2) {
+		t.Fatal("CompareAndSwap reported swap when the old value did not match")
+	}
+	if v := u.Value(); v != v1 {
+		t.Fatal("Value changed")
+	}
+
+	if !u.CompareAndSwap(v1, v2) {
+		t.Fatal("CompareAndSwap did not report a swap")
+	}
+	if v := u.Value(); v != v2 {
+		t.Fatal("Value unchanged")
+	}
+
+	if u.Swap(v1) != v2 {
+		t.Fatal("Old value does not match")
+	}
+	if v := u.Value(); v != v1 {
+		t.Fatal("Value unchanged")
+	}
+}

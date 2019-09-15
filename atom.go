@@ -375,3 +375,35 @@ func (u *Uint64) Swap(new uint64) (old uint64) {
 func (u *Uint64) Value() (value uint64) {
 	return atomic.LoadUint64(&u.value)
 }
+
+// Uintptr is a wrapper for atomically accessed uintptr values
+type Uintptr struct {
+	_noCopy noCopy
+	value   uintptr
+}
+
+// Add atomically adds delta to the current value and returns the new value
+func (u *Uintptr) Add(delta uintptr) (new uintptr) {
+	return atomic.AddUintptr(&u.value, delta)
+}
+
+// CompareAndSwap atomically sets the new value only if the current value
+// matches the given old value and returns whether the new value was set
+func (u *Uintptr) CompareAndSwap(old, new uintptr) (swapped bool) {
+	return atomic.CompareAndSwapUintptr(&u.value, old, new)
+}
+
+// Set sets the new value regardless of the previous value
+func (u *Uintptr) Set(value uintptr) {
+	atomic.StoreUintptr(&u.value, value)
+}
+
+// Swap atomically sets the new value and returns the previous value
+func (u *Uintptr) Swap(new uintptr) (old uintptr) {
+	return atomic.SwapUintptr(&u.value, new)
+}
+
+// Value returns the current value
+func (u *Uintptr) Value() (value uintptr) {
+	return atomic.LoadUintptr(&u.value)
+}
