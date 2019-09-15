@@ -1,4 +1,7 @@
 // Package atom provides simple wrappers around types enforcing atomic usage
+//
+// The wrapper types do not introduce any size overhead and have the same size
+// as the wrapped type.
 package atom
 
 import (
