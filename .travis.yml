@@ -15,6 +15,7 @@ before_install:
   - go get github.com/mattn/goveralls
 script:
   - go test -v -covermode=count -coverprofile=coverage.out
+  - go test -v -tags purego
   - go vet ./...
   - test -z "$(gofmt -d -s . | tee /dev/stderr)"
   - $HOME/gopath/bin/goveralls  -coverprofile=coverage.out -service=travis-ci
