@@ -294,12 +294,15 @@ func (i *Int64) Value() (value int64) {
 }
 
 // String is a wrapper for atomically accessed string values.
+// Note: The string value is wrapped in an interface. Thus, this wrapper has
+// a memory overhead.
 type String struct {
 	_noCopy noCopy
 	value   atomic.Value
 }
 
 // Set sets the new value regardless of the previous value.
+// Note: Set requires an allocation as the value is wrapped in an interface.
 func (s *String) Set(value string) {
 	s.value.Store(value)
 }
