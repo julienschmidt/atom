@@ -293,13 +293,14 @@ func TestPointer(t *testing.T) {
 		t.Fatal("Expected initial value to be nil")
 	}
 
-	v1 := unsafe.Pointer(uintptr(1337))
+	var t1, t2 uint64
+	v1 := unsafe.Pointer(&t1)
 	p.Set(v1)
 	if v := p.Value(); v != v1 {
 		t.Fatal("Value unchanged")
 	}
 
-	v2 := unsafe.Pointer(uintptr(987654321))
+	v2 := unsafe.Pointer(&t2)
 	if p.CompareAndSwap(v2, v2) {
 		t.Fatal("CompareAndSwap reported swap when the old value did not match")
 	}
