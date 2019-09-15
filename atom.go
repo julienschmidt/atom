@@ -70,7 +70,8 @@ type Duration struct {
 	value   int64
 }
 
-// Add atomically adds delta to the current value and returns the new value
+// Add atomically adds delta to the current value and returns the new value.
+// No arithmetic overflow checks are applied.
 func (d *Duration) Add(delta time.Duration) (new time.Duration) {
 	return time.Duration(atomic.AddInt64(&d.value, int64(delta)))
 }
@@ -84,6 +85,12 @@ func (d *Duration) CompareAndSwap(old, new time.Duration) (swapped bool) {
 // Set sets the new value regardless of the previous value
 func (d *Duration) Set(value time.Duration) {
 	atomic.StoreInt64(&d.value, int64(value))
+}
+
+// Sub atomically subtracts delta to the current value and returns the new value.
+// No arithmetic underflow checks are applied.
+func (d *Duration) Sub(delta time.Duration) (new time.Duration) {
+	return time.Duration(atomic.AddInt64(&d.value, -int64(delta)))
 }
 
 // Swap atomically sets the new value and returns the previous value
@@ -154,6 +161,11 @@ func (f *Float32) Set(value float32) {
 	atomic.StoreUint32(&f.value, math.Float32bits(value))
 }
 
+// Sub atomically subtracts delta to the current value and returns the new value.
+func (f *Float32) Sub(delta float32) (new float32) {
+	return f.Add(-delta)
+}
+
 // Swap atomically sets the new value and returns the previous value
 func (f *Float32) Swap(new float32) (old float32) {
 	return math.Float32frombits(atomic.SwapUint32(&f.value, math.Float32bits(new)))
@@ -193,6 +205,11 @@ func (f *Float64) Set(value float64) {
 	atomic.StoreUint64(&f.value, math.Float64bits(value))
 }
 
+// Sub atomically subtracts delta to the current value and returns the new value.
+func (f *Float64) Sub(delta float64) (new float64) {
+	return f.Add(-delta)
+}
+
 // Swap atomically sets the new value and returns the previous value
 func (f *Float64) Swap(new float64) (old float64) {
 	return math.Float64frombits(atomic.SwapUint64(&f.value, math.Float64bits(new)))
@@ -225,6 +242,11 @@ func (i *Int32) Set(value int32) {
 	atomic.StoreInt32(&i.value, value)
 }
 
+// Sub atomically subtracts delta to the current value and returns the new value.
+func (i *Int32) Sub(delta int32) (new int32) {
+	return i.Add(-delta)
+}
+
 // Swap atomically sets the new value and returns the previous value
 func (i *Int32) Swap(new int32) (old int32) {
 	return atomic.SwapInt32(&i.value, new)
@@ -255,6 +277,11 @@ func (i *Int64) CompareAndSwap(old, new int64) (swapped bool) {
 // Set sets the new value regardless of the previous value
 func (i *Int64) Set(value int64) {
 	atomic.StoreInt64(&i.value, value)
+}
+
+// Sub atomically subtracts delta to the current value and returns the new value.
+func (i *Int64) Sub(delta int64) (new int64) {
+	return i.Add(-delta)
 }
 
 // Swap atomically sets the new value and returns the previous value
@@ -337,6 +364,11 @@ func (u *Uint32) Set(value uint32) {
 	atomic.StoreUint32(&u.value, value)
 }
 
+// Sub atomically subtracts delta to the current value and returns the new value.
+func (u *Uint32) Sub(delta uint32) (new uint32) {
+	return u.Add(^uint32(delta - 1))
+}
+
 // Swap atomically sets the new value and returns the previous value
 func (u *Uint32) Swap(new uint32) (old uint32) {
 	return atomic.SwapUint32(&u.value, new)
@@ -369,6 +401,11 @@ func (u *Uint64) Set(value uint64) {
 	atomic.StoreUint64(&u.value, value)
 }
 
+// Sub atomically subtracts delta to the current value and returns the new value.
+func (u *Uint64) Sub(delta uint64) (new uint64) {
+	return u.Add(^uint64(delta - 1))
+}
+
 // Swap atomically sets the new value and returns the previous value
 func (u *Uint64) Swap(new uint64) (old uint64) {
 	return atomic.SwapUint64(&u.value, new)
@@ -399,6 +436,11 @@ func (u *Uintptr) CompareAndSwap(old, new uintptr) (swapped bool) {
 // Set sets the new value regardless of the previous value
 func (u *Uintptr) Set(value uintptr) {
 	atomic.StoreUintptr(&u.value, value)
+}
+
+// Sub atomically subtracts delta to the current value and returns the new value.
+func (u *Uintptr) Sub(delta uintptr) (new uintptr) {
+	return u.Add(^uintptr(delta - 1))
 }
 
 // Swap atomically sets the new value and returns the previous value

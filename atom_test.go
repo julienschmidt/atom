@@ -66,7 +66,7 @@ func TestDuration(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if d.Add(-v1) != 0 {
+	if d.Sub(v1) != 0 {
 		t.Fatal("New value does not match")
 	}
 	if d.Add(v1) != v1 {
@@ -131,7 +131,7 @@ func TestFloat32(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if f.Add(-v1) != 0 {
+	if f.Sub(v1) != 0 {
 		t.Fatal("New value does not match")
 	}
 	if f.Add(v1) != v1 {
@@ -173,7 +173,7 @@ func TestFloat64(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if f.Add(-v1) != 0 {
+	if f.Sub(v1) != 0 {
 		t.Fatal("New value does not match")
 	}
 	if f.Add(v1) != v1 {
@@ -215,7 +215,7 @@ func TestInt32(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if i.Add(-v1) != 0 {
+	if i.Sub(v1) != 0 {
 		t.Fatal("New value does not match")
 	}
 	if i.Add(v1) != v1 {
@@ -257,7 +257,7 @@ func TestInt64(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if i.Add(-v1) != 0 {
+	if i.Sub(v1) != 0 {
 		t.Fatal("New value does not match")
 	}
 	if i.Add(v1) != v1 {
@@ -356,7 +356,7 @@ func TestUint32(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if u.Add(-v1) != 0 {
+	if u.Sub(v1) != 0 {
 		t.Fatal("New value does not match")
 	}
 	if u.Add(v1) != v1 {
@@ -398,7 +398,7 @@ func TestUint64(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if u.Add(-v1) != 0 {
+	if u.Sub(v1) != 0 {
 		t.Fatal("New value does not match")
 	}
 	if u.Add(v1) != v1 {
@@ -440,7 +440,7 @@ func TestUintptr(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if u.Add(-v1) != 0 {
+	if u.Sub(v1) != 0 {
 		t.Fatal("New value does not match")
 	}
 	if u.Add(v1) != v1 {
