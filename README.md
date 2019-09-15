@@ -11,6 +11,8 @@ A safe and convenient alternative to sync/atomic.
 
 ## Usage
 
+A simple counter can be implemented as follows:
+
 ```go
 var counter atom.Uint64
 
