@@ -5,7 +5,7 @@ Intuitive wrappers types enforcing atomic access for lock-free concurrency.
 
 A safe and convenient alternative to sync/atomic.
 
-- Prevents non-atomic access
+- Prevents unsafe non-atomic access
 - Prevents copying (which is a non-atomic read)
 - No size overhead. The wrappers have the same size as the wrapped type
 
@@ -25,7 +25,7 @@ counter.Add(1)
 fmt.Println("Counter value:", counter.Value())
 ```
 
-Instead of using a costly `sync.Mutex` to guard the counter:
+Instead of using a costly [`sync.Mutex`](https://golang.org/pkg/sync/#Mutex) to guard the counter:
 
 ```go
 var (
@@ -51,7 +51,7 @@ counterMu.Unlock()
 fmt.Println("Counter value:", value)
 ```
 
-Or using `sync/atomic` directly, using an unintuitive interface and not guarding against non-atomic access to the counter:
+Or using [`sync/atomic`](https://golang.org/pkg/sync/atomic/) directly, using an unintuitive interface and not guarding against non-atomic access to the counter:
 
 ```go
 var counter uint64
