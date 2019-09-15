@@ -424,3 +424,22 @@ func (u *Uintptr) Swap(new uintptr) (old uintptr) {
 func (u *Uintptr) Value() (value uintptr) {
 	return atomic.LoadUintptr(&u.value)
 }
+
+// Value is a wrapper for atomically accessed consistently typed values.
+type Value struct {
+	_noCopy noCopy
+	value   atomic.Value
+}
+
+// Set sets the new value regardless of the previous value.
+// All calls to Set for a given Value must use values of the same concrete type.
+// Set of an inconsistent type panics, as does Set(nil).
+func (v *Value) Set(value interface{}) {
+	v.value.Store(value)
+}
+
+// Value returns the current value.
+// It returns nil if there has been no call to Set for this Value.
+func (v *Value) Value() (value interface{}) {
+	return v.value.Load()
+}

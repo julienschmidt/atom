@@ -432,3 +432,22 @@ func TestUintptr(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 }
+
+func TestValue(t *testing.T) {
+	var v Value
+	if v.Value() != nil {
+		t.Fatal("Expected initial value to be nil")
+	}
+
+	var v1 uint64 = 1337
+	v.Set(v1)
+	if val := v.Value(); val != v1 {
+		t.Fatal("Value does not match")
+	}
+
+	var v2 uint64 = 987654321
+	v.Set(v2)
+	if val := v.Value(); val != v2 {
+		t.Fatal("Value does not match")
+	}
+}
