@@ -31,8 +31,8 @@ Instead of using a costly [`sync.Mutex`](https://golang.org/pkg/sync/#Mutex) to 
 
 ```go
 var (
-	counter   uint64
-	counterMu sync.Mutex
+    counter   uint64
+    counterMu sync.Mutex
 )
 
 // concurrently:
