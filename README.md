@@ -7,7 +7,7 @@ A safe and convenient alternative to sync/atomic.
 
 - Prevents non-atomic access
 - Prevents copying (which is a non-atomic read)
-- No size overhead. The wrappers have the same size as wrapped type
+- No size overhead. The wrappers have the same size as the wrapped type
 
 ## Usage
 
