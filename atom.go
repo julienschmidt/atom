@@ -300,7 +300,6 @@ type String struct {
 }
 
 // Set sets the new value regardless of the previous value.
-// The value may be nil.
 func (s *String) Set(value string) {
 	s.value.Store(value)
 }
