@@ -65,11 +65,11 @@ func TestDuration(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if d.Sub(v1) != 0 {
-		t.Fatal("New value does not match")
+	if v := d.Sub(v1); v != 0 {
+		t.Fatal("New value does not match:", v)
 	}
-	if d.Add(v1) != v1 {
-		t.Fatal("New value does not match")
+	if v := d.Add(v1); v != v1 {
+		t.Fatal("New value does not match:", v)
 	}
 
 	v2 := time.Duration(987654321)
@@ -87,8 +87,8 @@ func TestDuration(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if d.Swap(v1) != v2 {
-		t.Fatal("Old value does not match")
+	if v := d.Swap(v1); v != v2 {
+		t.Fatal("Old value does not match:", v)
 	}
 	if v := d.Value(); v != v1 {
 		t.Fatal("Value unchanged")
@@ -130,11 +130,11 @@ func TestFloat32(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if f.Sub(v1) != 0 {
-		t.Fatal("New value does not match")
+	if v := f.Sub(v1); v != 0 {
+		t.Fatal("New value does not match:", v)
 	}
-	if f.Add(v1) != v1 {
-		t.Fatal("New value does not match")
+	if v := f.Add(v1); v != v1 {
+		t.Fatal("New value does not match:", v)
 	}
 
 	var v2 float32 = 98765.4321
@@ -152,8 +152,8 @@ func TestFloat32(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if f.Swap(v1) != v2 {
-		t.Fatal("Old value does not match")
+	if v := f.Swap(v1); v != v2 {
+		t.Fatal("Old value does not match:", v)
 	}
 	if v := f.Value(); v != v1 {
 		t.Fatal("Value unchanged")
@@ -172,11 +172,11 @@ func TestFloat64(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if f.Sub(v1) != 0 {
-		t.Fatal("New value does not match")
+	if v := f.Sub(v1); v != 0 {
+		t.Fatal("New value does not match:", v)
 	}
-	if f.Add(v1) != v1 {
-		t.Fatal("New value does not match")
+	if v := f.Add(v1); v != v1 {
+		t.Fatal("New value does not match:", v)
 	}
 
 	v2 := 98765.4321
@@ -194,8 +194,8 @@ func TestFloat64(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if f.Swap(v1) != v2 {
-		t.Fatal("Old value does not match")
+	if v := f.Swap(v1); v != v2 {
+		t.Fatal("Old value does not match:", v)
 	}
 	if v := f.Value(); v != v1 {
 		t.Fatal("Value unchanged")
@@ -214,11 +214,11 @@ func TestInt32(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if i.Sub(v1) != 0 {
-		t.Fatal("New value does not match")
+	if v := i.Sub(v1); v != 0 {
+		t.Fatal("New value does not match:", v)
 	}
-	if i.Add(v1) != v1 {
-		t.Fatal("New value does not match")
+	if v := i.Add(v1); v != v1 {
+		t.Fatal("New value does not match:", v)
 	}
 
 	var v2 int32 = 987654321
@@ -236,8 +236,8 @@ func TestInt32(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if i.Swap(v1) != v2 {
-		t.Fatal("Old value does not match")
+	if v := i.Swap(v1); v != v2 {
+		t.Fatal("Old value does not match:", v)
 	}
 	if v := i.Value(); v != v1 {
 		t.Fatal("Value unchanged")
@@ -256,11 +256,11 @@ func TestInt64(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if i.Sub(v1) != 0 {
-		t.Fatal("New value does not match")
+	if v := i.Sub(v1); v != 0 {
+		t.Fatal("New value does not match:", v)
 	}
-	if i.Add(v1) != v1 {
-		t.Fatal("New value does not match")
+	if v := i.Add(v1); v != v1 {
+		t.Fatal("New value does not match:", v)
 	}
 
 	var v2 int64 = 987654321
@@ -278,8 +278,8 @@ func TestInt64(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if i.Swap(v1) != v2 {
-		t.Fatal("Old value does not match")
+	if v := i.Swap(v1); v != v2 {
+		t.Fatal("Old value does not match:", v)
 	}
 	if v := i.Value(); v != v1 {
 		t.Fatal("Value unchanged")
@@ -319,11 +319,11 @@ func TestUint32(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if u.Sub(v1) != 0 {
-		t.Fatal("New value does not match")
+	if v := u.Sub(v1); v != 0 {
+		t.Fatal("New value does not match:", v)
 	}
-	if u.Add(v1) != v1 {
-		t.Fatal("New value does not match")
+	if v := u.Add(v1); v != v1 {
+		t.Fatal("New value does not match:", v)
 	}
 
 	var v2 uint32 = 987654321
@@ -341,8 +341,8 @@ func TestUint32(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if u.Swap(v1) != v2 {
-		t.Fatal("Old value does not match")
+	if v := u.Swap(v1); v != v2 {
+		t.Fatal("Old value does not match:", v)
 	}
 	if v := u.Value(); v != v1 {
 		t.Fatal("Value unchanged")
@@ -361,11 +361,11 @@ func TestUint64(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if u.Sub(v1) != 0 {
-		t.Fatal("New value does not match")
+	if v := u.Sub(v1); v != 0 {
+		t.Fatal("New value does not match:", v)
 	}
-	if u.Add(v1) != v1 {
-		t.Fatal("New value does not match")
+	if v := u.Add(v1); v != v1 {
+		t.Fatal("New value does not match:", v)
 	}
 
 	var v2 uint64 = 987654321
@@ -383,8 +383,8 @@ func TestUint64(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if u.Swap(v1) != v2 {
-		t.Fatal("Old value does not match")
+	if v := u.Swap(v1); v != v2 {
+		t.Fatal("Old value does not match:", v)
 	}
 	if v := u.Value(); v != v1 {
 		t.Fatal("Value unchanged")
@@ -403,11 +403,11 @@ func TestUintptr(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if u.Sub(v1) != 0 {
-		t.Fatal("New value does not match")
+	if v := u.Sub(v1); v != 0 {
+		t.Fatal("New value does not match:", v)
 	}
-	if u.Add(v1) != v1 {
-		t.Fatal("New value does not match")
+	if v := u.Add(v1); v != v1 {
+		t.Fatal("New value does not match:", v)
 	}
 
 	v2 := uintptr(987654321)
@@ -425,8 +425,8 @@ func TestUintptr(t *testing.T) {
 		t.Fatal("Value unchanged")
 	}
 
-	if u.Swap(v1) != v2 {
-		t.Fatal("Old value does not match")
+	if v := u.Swap(v1); v != v2 {
+		t.Fatal("Old value does not match:", v)
 	}
 	if v := u.Value(); v != v1 {
 		t.Fatal("Value unchanged")
