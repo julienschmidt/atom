@@ -6,6 +6,11 @@ import (
 	"time"
 )
 
+const (
+	minUint = 0
+	maxUint = ^uint(0)
+)
+
 func TestBool(t *testing.T) {
 	// make go cover happy
 	var nc noCopy
@@ -304,6 +309,68 @@ func TestString(t *testing.T) {
 		t.Fatal("Value still matches initial value")
 	} else if v != "" {
 		t.Fatal("Value did not match")
+	}
+}
+
+func TestUint(t *testing.T) {
+	var u Uint
+	if u.Value() != 0 {
+		t.Fatal("Expected initial value to be 0")
+	}
+
+	var v1 uint = 1337
+	u.Set(v1)
+	if v := u.Value(); v != v1 {
+		t.Fatal("Value unchanged")
+	}
+
+	if v := u.Sub(v1); v != 0 {
+		t.Fatal("New value does not match:", v)
+	}
+	if v := u.Add(v1); v != v1 {
+		t.Fatal("New value does not match:", v)
+	}
+
+	var v2 uint = 987654321
+	if u.CompareAndSwap(v2, v2) {
+		t.Fatal("CompareAndSwap reported swap when the old value did not match")
+	}
+	if v := u.Value(); v != v1 {
+		t.Fatal("Value changed")
+	}
+
+	if !u.CompareAndSwap(v1, v2) {
+		t.Fatal("CompareAndSwap did not report a swap")
+	}
+	if v := u.Value(); v != v2 {
+		t.Fatal("Value unchanged")
+	}
+
+	if v := u.Swap(v1); v != v2 {
+		t.Fatal("Old value does not match:", v)
+	}
+	if v := u.Value(); v != v1 {
+		t.Fatal("Value unchanged")
+	}
+
+	// test underflow behavior
+	v3 := uint(minUint)
+	u.Set(v3)
+	if v := u.Value(); v != v3 {
+		t.Fatal("Value unchanged")
+	}
+	if v := u.Sub(1); v != (v3 - 1) {
+		t.Fatal("New value does not match:", v)
+	}
+
+	// test overflow behavior
+	v4 := uint(maxUint)
+	u.Set(v4)
+	if v := u.Value(); v != v4 {
+		t.Fatal("Value unchanged")
+	}
+	if v := u.Add(1); v != (v4 + 1) {
+		t.Fatal("New value does not match:", v)
 	}
 }
 

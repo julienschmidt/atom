@@ -316,6 +316,43 @@ func (s *String) Value() (value string) {
 	return v.(string)
 }
 
+// Uint is a wrapper for atomically accessed uint values.
+type Uint struct {
+	_noCopy noCopy
+	value   uintptr
+}
+
+// Add atomically adds delta to the current value and returns the new value.
+func (u *Uint) Add(delta uint) (new uint) {
+	return uint(atomic.AddUintptr(&u.value, uintptr(delta)))
+}
+
+// CompareAndSwap atomically sets the new value only if the current value
+// matches the given old value and returns whether the new value was set.
+func (u *Uint) CompareAndSwap(old, new uint) (swapped bool) {
+	return atomic.CompareAndSwapUintptr(&u.value, uintptr(old), uintptr(new))
+}
+
+// Set sets the new value regardless of the previous value.
+func (u *Uint) Set(value uint) {
+	atomic.StoreUintptr(&u.value, uintptr(value))
+}
+
+// Sub atomically subtracts delta to the current value and returns the new value.
+func (u *Uint) Sub(delta uint) (new uint) {
+	return u.Add(^uint(delta - 1))
+}
+
+// Swap atomically sets the new value and returns the previous value.
+func (u *Uint) Swap(new uint) (old uint) {
+	return uint(atomic.SwapUintptr(&u.value, uintptr(new)))
+}
+
+// Value returns the current value.
+func (u *Uint) Value() (value uint) {
+	return uint(atomic.LoadUintptr(&u.value))
+}
+
 // Uint32 is a wrapper for atomically accessed uint32 values.
 type Uint32 struct {
 	_noCopy noCopy
