@@ -7,8 +7,11 @@ import (
 )
 
 const (
-	minUint = 0
 	maxUint = ^uint(0)
+	minUint = 0
+
+	maxInt = int(maxUint >> 1)
+	minInt = -maxInt - 1
 )
 
 func TestBool(t *testing.T) {
@@ -204,6 +207,68 @@ func TestFloat64(t *testing.T) {
 	}
 	if v := f.Value(); v != v1 {
 		t.Fatal("Value unchanged")
+	}
+}
+
+func TestInt(t *testing.T) {
+	var i Int
+	if i.Value() != 0 {
+		t.Fatal("Expected initial value to be 0")
+	}
+
+	var v1 int = 1337
+	i.Set(v1)
+	if v := i.Value(); v != v1 {
+		t.Fatal("Value unchanged")
+	}
+
+	if v := i.Sub(v1); v != 0 {
+		t.Fatal("New value does not match:", v)
+	}
+	if v := i.Add(v1); v != v1 {
+		t.Fatal("New value does not match:", v)
+	}
+
+	var v2 int = 987654321
+	if i.CompareAndSwap(v2, v2) {
+		t.Fatal("CompareAndSwap reported swap when the old value did not match")
+	}
+	if v := i.Value(); v != v1 {
+		t.Fatal("Value changed")
+	}
+
+	if !i.CompareAndSwap(v1, v2) {
+		t.Fatal("CompareAndSwap did not report a swap")
+	}
+	if v := i.Value(); v != v2 {
+		t.Fatal("Value unchanged")
+	}
+
+	if v := i.Swap(v1); v != v2 {
+		t.Fatal("Old value does not match:", v)
+	}
+	if v := i.Value(); v != v1 {
+		t.Fatal("Value unchanged")
+	}
+
+	// test underflow behavior
+	v3 := int(minInt)
+	i.Set(v3)
+	if v := i.Value(); v != v3 {
+		t.Fatal("Value unchanged")
+	}
+	if v := i.Sub(1); v != (v3 - 1) {
+		t.Fatal("New value does not match:", v)
+	}
+
+	// test overflow behavior
+	v4 := int(maxInt)
+	i.Set(v4)
+	if v := i.Value(); v != v4 {
+		t.Fatal("Value unchanged")
+	}
+	if v := i.Add(1); v != (v4 + 1) {
+		t.Fatal("New value does not match:", v)
 	}
 }
 

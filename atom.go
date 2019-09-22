@@ -219,6 +219,43 @@ func (f *Float64) Value() (value float64) {
 	return math.Float64frombits(atomic.LoadUint64(&f.value))
 }
 
+// Int is a wrapper for atomically accessed int values.
+type Int struct {
+	_noCopy noCopy
+	value   uintptr
+}
+
+// Add atomically adds delta to the current value and returns the new value.
+func (i *Int) Add(delta int) (new int) {
+	return int(atomic.AddUintptr(&i.value, uintptr(delta)))
+}
+
+// CompareAndSwap atomically sets the new value only if the current value
+// matches the given old value and returns whether the new value was set.
+func (i *Int) CompareAndSwap(old, new int) (swapped bool) {
+	return atomic.CompareAndSwapUintptr(&i.value, uintptr(old), uintptr(new))
+}
+
+// Set sets the new value regardless of the previous value.
+func (i *Int) Set(value int) {
+	atomic.StoreUintptr(&i.value, uintptr(value))
+}
+
+// Sub atomically subtracts delta to the current value and returns the new value.
+func (i *Int) Sub(delta int) (new int) {
+	return i.Add(-delta)
+}
+
+// Swap atomically sets the new value and returns the previous value.
+func (i *Int) Swap(new int) (old int) {
+	return int(atomic.SwapUintptr(&i.value, uintptr(new)))
+}
+
+// Value returns the current value.
+func (i *Int) Value() (value int) {
+	return int(atomic.LoadUintptr(&i.value))
+}
+
 // Int32 is a wrapper for atomically accessed int32 values.
 type Int32 struct {
 	_noCopy noCopy
