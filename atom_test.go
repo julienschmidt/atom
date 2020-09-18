@@ -252,7 +252,7 @@ func TestInt(t *testing.T) {
 	}
 
 	// test underflow behavior
-	v3 := int(minInt)
+	v3 := minInt
 	i.Set(v3)
 	if v := i.Value(); v != v3 {
 		t.Fatal("Value unchanged")
@@ -262,7 +262,7 @@ func TestInt(t *testing.T) {
 	}
 
 	// test overflow behavior
-	v4 := int(maxInt)
+	v4 := maxInt
 	i.Set(v4)
 	if v := i.Value(); v != v4 {
 		t.Fatal("Value unchanged")
@@ -429,7 +429,7 @@ func TestUint(t *testing.T) {
 	}
 
 	// test overflow behavior
-	v4 := uint(maxUint)
+	v4 := maxUint
 	u.Set(v4)
 	if v := u.Value(); v != v4 {
 		t.Fatal("Value unchanged")

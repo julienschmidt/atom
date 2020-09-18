@@ -377,7 +377,7 @@ func (u *Uint) Set(value uint) {
 
 // Sub atomically subtracts delta to the current value and returns the new value.
 func (u *Uint) Sub(delta uint) (new uint) {
-	return u.Add(^uint(delta - 1))
+	return u.Add(^(delta - 1))
 }
 
 // Swap atomically sets the new value and returns the previous value.
@@ -414,7 +414,7 @@ func (u *Uint32) Set(value uint32) {
 
 // Sub atomically subtracts delta to the current value and returns the new value.
 func (u *Uint32) Sub(delta uint32) (new uint32) {
-	return u.Add(^uint32(delta - 1))
+	return u.Add(^(delta - 1))
 }
 
 // Swap atomically sets the new value and returns the previous value.
@@ -451,7 +451,7 @@ func (u *Uint64) Set(value uint64) {
 
 // Sub atomically subtracts delta to the current value and returns the new value.
 func (u *Uint64) Sub(delta uint64) (new uint64) {
-	return u.Add(^uint64(delta - 1))
+	return u.Add(^(delta - 1))
 }
 
 // Swap atomically sets the new value and returns the previous value.
@@ -488,7 +488,7 @@ func (u *Uintptr) Set(value uintptr) {
 
 // Sub atomically subtracts delta to the current value and returns the new value.
 func (u *Uintptr) Sub(delta uintptr) (new uintptr) {
-	return u.Add(^uintptr(delta - 1))
+	return u.Add(^(delta - 1))
 }
 
 // Swap atomically sets the new value and returns the previous value.
