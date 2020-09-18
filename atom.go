@@ -24,8 +24,8 @@ func (*noCopy) Lock() {}
 // Bool is a wrapper around uint32 for usage as a boolean value with
 // atomic access.
 type Bool struct {
-	_noCopy noCopy
-	value   uint32
+	_     noCopy
+	value uint32
 }
 
 // CompareAndSwap atomically sets the new value only if the current value
@@ -65,8 +65,8 @@ func (b *Bool) Value() (value bool) {
 
 // Duration is a wrapper for atomically accessed time.Duration values.
 type Duration struct {
-	_noCopy noCopy
-	value   int64
+	_     noCopy
+	value int64
 }
 
 // Add atomically adds delta to the current value and returns the new value.
@@ -107,8 +107,8 @@ var errNil = errors.New("nil")
 
 // Error is a wrapper for atomically accessed error values
 type Error struct {
-	_noCopy noCopy
-	value   atomic.Value
+	_     noCopy
+	value atomic.Value
 }
 
 // Set sets the new value regardless of the previous value.
@@ -133,8 +133,8 @@ func (e *Error) Value() (value error) {
 
 // Float32 is a wrapper for atomically accessed float32 values.
 type Float32 struct {
-	_noCopy noCopy
-	value   uint32
+	_     noCopy
+	value uint32
 }
 
 // Add adds delta to the current value and returns the new value.
@@ -177,8 +177,8 @@ func (f *Float32) Value() (value float32) {
 
 // Float64 is a wrapper for atomically accessed float64 values.
 type Float64 struct {
-	_noCopy noCopy
-	value   uint64
+	_     noCopy
+	value uint64
 }
 
 // Add adds delta to the current value and returns the new value.
@@ -221,8 +221,8 @@ func (f *Float64) Value() (value float64) {
 
 // Int is a wrapper for atomically accessed int values.
 type Int struct {
-	_noCopy noCopy
-	value   uintptr
+	_     noCopy
+	value uintptr
 }
 
 // Add atomically adds delta to the current value and returns the new value.
@@ -258,8 +258,8 @@ func (i *Int) Value() (value int) {
 
 // Int32 is a wrapper for atomically accessed int32 values.
 type Int32 struct {
-	_noCopy noCopy
-	value   int32
+	_     noCopy
+	value int32
 }
 
 // Add atomically adds delta to the current value and returns the new value.
@@ -295,8 +295,8 @@ func (i *Int32) Value() (value int32) {
 
 // Int64 is a wrapper for atomically accessed int64 values.
 type Int64 struct {
-	_noCopy noCopy
-	value   int64
+	_     noCopy
+	value int64
 }
 
 // Add atomically adds delta to the current value and returns the new value.
@@ -334,8 +334,8 @@ func (i *Int64) Value() (value int64) {
 // Note: The string value is wrapped in an interface. Thus, this wrapper has
 // a memory overhead.
 type String struct {
-	_noCopy noCopy
-	value   atomic.Value
+	_     noCopy
+	value atomic.Value
 }
 
 // Set sets the new value regardless of the previous value.
@@ -355,8 +355,8 @@ func (s *String) Value() (value string) {
 
 // Uint is a wrapper for atomically accessed uint values.
 type Uint struct {
-	_noCopy noCopy
-	value   uintptr
+	_     noCopy
+	value uintptr
 }
 
 // Add atomically adds delta to the current value and returns the new value.
@@ -392,8 +392,8 @@ func (u *Uint) Value() (value uint) {
 
 // Uint32 is a wrapper for atomically accessed uint32 values.
 type Uint32 struct {
-	_noCopy noCopy
-	value   uint32
+	_     noCopy
+	value uint32
 }
 
 // Add atomically adds delta to the current value and returns the new value.
@@ -429,8 +429,8 @@ func (u *Uint32) Value() (value uint32) {
 
 // Uint64 is a wrapper for atomically accessed uint64 values.
 type Uint64 struct {
-	_noCopy noCopy
-	value   uint64
+	_     noCopy
+	value uint64
 }
 
 // Add atomically adds delta to the current value and returns the new value.
@@ -466,8 +466,8 @@ func (u *Uint64) Value() (value uint64) {
 
 // Uintptr is a wrapper for atomically accessed uintptr values.
 type Uintptr struct {
-	_noCopy noCopy
-	value   uintptr
+	_     noCopy
+	value uintptr
 }
 
 // Add atomically adds delta to the current value and returns the new value.
@@ -503,8 +503,8 @@ func (u *Uintptr) Value() (value uintptr) {
 
 // Value is a wrapper for atomically accessed consistently typed values.
 type Value struct {
-	_noCopy noCopy
-	value   atomic.Value
+	_     noCopy
+	value atomic.Value
 }
 
 // Set sets the new value regardless of the previous value.

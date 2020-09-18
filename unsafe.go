@@ -9,8 +9,8 @@ import (
 
 // Pointer is a wrapper for atomically accessed unsafe.Pointer values.
 type Pointer struct {
-	_noCopy noCopy
-	value   unsafe.Pointer
+	_     noCopy
+	value unsafe.Pointer
 }
 
 // CompareAndSwap atomically sets the new value only if the current value
